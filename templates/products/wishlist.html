@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-4">
+  <h4 class="mb-3">My Wishlist</h4>
+
+  {% if wishlist.items.all %}
+    {% for item in wishlist.items.all %}
+      <div class="card mb-3 shadow-sm">
+        <div class="row g-0 align-items-center">
+          <div class="col-4">
+            {% if item.product.image %}
+              <img src="{{ item.product.image.url }}" class="img-fluid rounded">
+            {% endif %}
+          </div>
+
+          <div class="col-8 p-3">
+            <h6 class="mb-1">{{ item.product.name }}</h6>
+            <p class="fw-bold mb-2">€{{ item.product.price }}</p>
+
+            <!-- ✅ Move to cart must be POST to send size -->
+            <form method="post" action="{% url 'products:move_to_cart' item.id %}" class="mt-2">
+              {% csrf_token %}
+
+              {% if item.product.has_sizes %}
+                <div class="mb-2">
+                  <label class="fw-semibold d-block mb-1">Select Size</label>
+
+                  <div class="d-flex flex-wrap gap-2">
+                    {% for s in item.product.sizes.all %}
+                      <input
+                        type="radio"
+                        class="btn-check"
+                        name="size"
+                        id="size-{{ item.id }}-{{ s.id }}"
+                        value="{{ s.size }}"
+                        {% if s.stock <= 0 %}disabled{% endif %}
+                        required
+                      >
+                      <label
+                        class="btn {% if s.stock <= 0 %}btn-outline-secondary{% else %}btn-outline-dark{% endif %} btn-sm"
+                        for="size-{{ item.id }}-{{ s.id }}"
+                      >
+                        {{ s.size }}{% if s.stock <= 0 %} (Out){% endif %}
+                      </label>
+                    {% empty %}
+                      <p class="text-muted mb-0">No sizes added for this product.</p>
+                    {% endfor %}
+                    </div>
+                </div>
+              {% endif %}
+
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-sm btn-dark">
+                  Move to Cart
+                </button>
+
+                <a href="{% url 'products:remove_from_wishlist' item.id %}"
+                   class="btn btn-sm btn-outline-danger">
+                  Remove
+                </a>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Your wishlist is empty.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

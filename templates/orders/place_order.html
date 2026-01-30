@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container my-4" style="max-width: 720px;">
+  <h4 class="mb-3">Delivery Details</h4>
+
+  <form method="post" action="{% url 'orders:place_order' %}">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label class="form-label">Full Name</label>
+      <input type="text" name="full_name" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Phone</label>
+      <input type="text" name="phone" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Address</label>
+      <textarea name="address" rows="3" class="form-control" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-gold w-100">
+      Confirm Order (Cash on Delivery)
+    </button>
+  </form>
+</div>
+
+{% endblock %}
+

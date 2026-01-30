@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-4">
+    <h4 class="mb-3">Your Cart</h4>
+
+    {% if cart_items.exists %}
+        {% for item in cart_items %}
+        <div class="card mb-3 shadow-sm" id="cart-item-{{ item.id }}">
+            <div class="row g-0 align-items-center">
+
+                <!-- PRODUCT IMAGE -->
+                <div class="col-4">
+                    {% if item.product.image %}
+                        <img src="{{ item.product.image.url }}"
+                             class="img-fluid rounded">
+                    {% endif %}
+                </div>
+
+                <!-- PRODUCT DETAILS -->
+                <div class="col-8 p-3">
+                    <h6 class="mb-1">{{ item.product.name }}</h6>
+
+                    {% if item.size %}
+                        <p class="mb-1">
+                            Size: <strong>{{ item.size }}</strong>
+                        </p>
+                    {% endif %}
+
+                    <!-- ITEM TOTAL -->
+                    <p class="fw-bold mb-2">
+                        €<span id="item-total-{{ item.id }}">
+                            {{ item.total_price }}
+                        </span>
+                    </p>
+
+                    <!-- QUANTITY CONTROLS -->
+                    <div class="d-flex align-items-center gap-2 mt-2">
+
+                        <button type="button"
+                                class="btn btn-outline-dark btn-sm qty-btn"
+                                data-id="{{ item.id }}"
+                                data-action="decrease">
+                            −
+                        </button>
+
+                        <span id="qty-{{ item.id }}" class="fw-semibold">
+                            {{ item.quantity }}
+                        </span>
+
+                        <button type="button"
+                                class="btn btn-outline-dark btn-sm qty-btn"
+                                data-id="{{ item.id }}"
+                                data-action="increase">
+                            +
+                        </button>
+
+                        <!-- REMOVE -->
+                        <a href="{% url 'orders:remove_from_cart' item.id %}"
+                           class="btn btn-sm btn-outline-danger ms-auto">
+                            Remove
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- CART TOTAL -->
+        <div class="text-end mt-3">
+            <h5>
+                Total: €<span id="cart-total">{{ cart.total_price }}</span>
+            </h5>
+
+            <a href="{% url 'orders:place_order' %}"
+               class="btn btn-success w-100 mt-2">
+                Place Order (Cash on Delivery)
+            </a>
+        </div>
+
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

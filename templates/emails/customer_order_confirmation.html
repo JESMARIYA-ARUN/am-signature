@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Order Confirmed</title>
+</head>
+<body style="margin:0;padding:0;background:#f6f6f6;font-family:Arial,sans-serif;">
+  <div style="max-width:650px;margin:30px auto;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #eee;">
+
+    <!-- Header -->
+    <div style="padding:22px 24px;background:#111;color:#fff;">
+      <h2 style="margin:0;font-size:18px;letter-spacing:.3px;">{{ brand_name }}</h2>
+      <p style="margin:6px 0 0;color:#d6d6d6;font-size:13px;">Wear Your Story</p>
+    </div>
+
+    <!-- Body -->
+    <div style="padding:24px;">
+      <h3 style="margin:0 0 10px;font-size:18px;color:#111;">Order Confirmed ✅</h3>
+      <p style="margin:0 0 14px;color:#444;font-size:14px;line-height:1.6;">
+        Hi <strong>{{ order.full_name }}</strong>, thank you for shopping with us!
+        Your order has been successfully placed.
+      </p>
+
+      <div style="background:#fafafa;border:1px solid #eee;border-radius:10px;padding:14px;margin:14px 0;">
+        <p style="margin:0;color:#222;font-size:14px;">
+          <strong>Order ID:</strong> #{{ order.id }}<br>
+          <strong>Placed:</strong> {{ now|date:"d M Y, H:i" }}<br>
+          <strong>Payment:</strong> Cash on Delivery
+        </p>
+      </div>
+
+      <h4 style="margin:18px 0 8px;font-size:15px;color:#111;">Delivery Address</h4>
+      <p style="margin:0 0 12px;color:#444;font-size:14px;white-space:pre-line;">{{ order.address }}</p>
+
+      <h4 style="margin:18px 0 8px;font-size:15px;color:#111;">Your Items</h4>
+
+      <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+        <thead>
+          <tr>
+            <th align="left" style="padding:10px;border-bottom:1px solid #eee;font-size:13px;color:#666;">Product</th>
+            <th align="center" style="padding:10px;border-bottom:1px solid #eee;font-size:13px;color:#666;">Qty</th>
+            <th align="center" style="padding:10px;border-bottom:1px solid #eee;font-size:13px;color:#666;">Size</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in items %}
+          <tr>
+            <td style="padding:10px;border-bottom:1px solid #f0f0f0;font-size:14px;color:#222;">
+              {{ i.product.name }}
+            </td>
+            <td align="center" style="padding:10px;border-bottom:1px solid #f0f0f0;font-size:14px;color:#222;">
+              {{ i.quantity }}
+            </td>
+            <td align="center" style="padding:10px;border-bottom:1px solid #f0f0f0;font-size:14px;color:#222;">
+              {% if i.size %}{{ i.size }}{% else %}-{% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <p style="margin:16px 0 0;color:#444;font-size:14px;line-height:1.6;">
+        We’ll notify you when your order is out for delivery.
+      </p>
+
+      <p style="margin:10px 0 0;color:#666;font-size:13px;">
+        Need help? Reply to this email.
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <div style="padding:16px 24px;background:#fafafa;border-top:1px solid #eee;color:#888;font-size:12px;">
+      © {{ now|date:"Y" }} {{ brand_name }} — Wear Your Story
+    </div>
+
+  </div>
+</body>
+</html>

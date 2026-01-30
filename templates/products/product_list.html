@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Shop | A&M Signature{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+
+    <h2 class="text-center mb-4">Our Collection</h2>
+
+    <div class="row g-3">
+
+        {% if products %}
+            {% for product in products %}
+            <div class="col-6 col-md-4 col-lg-3">
+
+                <div class="card h-100 shadow-sm">
+
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300x300?text=No+Image" class="card-img-top" alt="No Image">
+                    {% endif %}
+
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title mb-1">{{ product.name }}</h6>
+                        <p class="fw-bold mb-2">€{{ product.price }}</p>
+
+                        <a href="{% url 'products:product_detail' product.id %}"
+                           class="btn btn-outline-dark w-100 mt-auto">
+                            View Details
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-center">No products available.</p>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

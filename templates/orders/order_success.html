@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h3>🎉 Order Placed Successfully!</h3>
+    <p>Your order will be delivered soon.</p>
+
+    <a href="{% url 'products:product_list' %}" class="btn btn-gold mt-3">
+        Continue Shopping
+    </a>
+</div>
+{% endblock %}

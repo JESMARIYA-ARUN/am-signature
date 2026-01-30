@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static form_tags %}
+
+{% block title %}Register | A&M Signature{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card register-card shadow-lg border-0">
+    <div class="card-body p-4">
+
+      <h4 class="gold-text text-center mb-3">Create Your Account</h4>
+
+      <form method="post" novalidate>
+        {% csrf_token %}
+
+        {% for field in form %}
+          <div class="mb-3">
+
+            {# ✅ For floating labels: input must be inside .form-floating and label comes AFTER input #}
+            <div class="form-floating">
+              {{ field|add_class:"form-control auth-input" }}
+
+              <label for="{{ field.id_for_label }}" class="fw-semibold">
+                {{ field.label }}
+              </label>
+            </div>
+
+            {# ✅ Password strength meter (keep it OUTSIDE .form-floating) #}
+            {% if field.name == "password1" %}
+              <div class="strength-meter mt-2">
+                <div class="strength-track">
+                  <div id="strength-bar" class="strength-bar"></div>
+                </div>
+                <small id="strength-text" class="strength-text"></small>
+              </div>
+            {% endif %}
+
+            {% if field.errors %}
+              <small class="text-danger d-block mt-1">
+                {{ field.errors|striptags }}
+              </small>
+            {% endif %}
+
+          </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-gold w-100 mt-2">
+          Register
+        </button>
+      </form>
+
+      <div class="text-center mt-3">
+        <p class="small mb-0">
+          Already have an account?
+          <a href="{% url 'login' %}" class="gold-link fw-semibold">Login</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

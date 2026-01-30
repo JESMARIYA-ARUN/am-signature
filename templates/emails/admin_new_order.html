@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>New Order</title>
+</head>
+<body style="margin:0;padding:0;background:#f6f6f6;font-family:Arial,Helvetica,sans-serif;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f6f6f6;padding:24px 0;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="640" cellspacing="0" cellpadding="0"
+               style="background:#ffffff;border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.08);">
+          
+          <!-- Header -->
+          <tr>
+            <td style="padding:22px 26px;background:#111;color:#fff;">
+              <div style="font-size:18px;font-weight:700;letter-spacing:.2px;">
+                A&amp;M Signature
+              </div>
+              <div style="font-size:12px;opacity:.85;margin-top:4px;">
+                New order placed — Order #{{ order.id }}
+              </div>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding:24px 26px;">
+              <h2 style="margin:0 0 10px;font-size:18px;color:#111;">
+                New Order Received ✅
+              </h2>
+
+              <p style="margin:0 0 18px;color:#444;font-size:14px;line-height:1.5;">
+                A customer has placed an order. Details are below.
+              </p>
+
+              <!-- Summary cards -->
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-bottom:18px;">
+                <tr>
+                  <td style="padding:14px;border:1px solid #eee;border-radius:12px;">
+                    <div style="font-size:12px;color:#777;">Customer</div>
+                    <div style="font-size:14px;color:#111;font-weight:700;margin-top:4px;">
+                      {{ order.full_name }}
+                    </div>
+                    <div style="font-size:13px;color:#444;margin-top:6px;">
+                      <strong>Email:</strong> {{ order.user.email|default:"(no email)" }}<br>
+                      <strong>Phone:</strong> {{ order.phone }}<br>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="height:12px;"></td>
+                </tr>
+                <tr>
+                  <td style="padding:14px;border:1px solid #eee;border-radius:12px;">
+                    <div style="font-size:12px;color:#777;">Delivery Address</div>
+                    <div style="font-size:13px;color:#444;margin-top:6px;white-space:pre-line;">
+                      {{ order.address }}
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Items table -->
+              <h3 style="margin:0 0 10px;font-size:15px;color:#111;">Items</h3>
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0"
+                     style="border-collapse:separate;border-spacing:0;border:1px solid #eee;border-radius:12px;overflow:hidden;">
+                <tr style="background:#fafafa;">
+                  <th align="left" style="padding:12px;font-size:12px;color:#666;border-bottom:1px solid #eee;">Product</th>
+                  <th align="center" style="padding:12px;font-size:12px;color:#666;border-bottom:1px solid #eee;">Size</th>
+                  <th align="center" style="padding:12px;font-size:12px;color:#666;border-bottom:1px solid #eee;">Qty</th>
+                </tr>
+
+                {% for i in items %}
+                <tr>
+                  <td style="padding:12px;font-size:13px;color:#111;border-bottom:1px solid #f1f1f1;">
+                    {{ i.product.name }}
+                  </td>
+                  <td align="center" style="padding:12px;font-size:13px;color:#444;border-bottom:1px solid #f1f1f1;">
+                    {% if i.size %}{{ i.size }}{% else %}—{% endif %}
+                  </td>
+                  <td align="center" style="padding:12px;font-size:13px;color:#111;border-bottom:1px solid #f1f1f1;">
+                    {{ i.quantity }}
+                  </td>
+                </tr>
+                {% endfor %}
+              </table>
+
+              <p style="margin:18px 0 0;color:#777;font-size:12px;line-height:1.5;">
+                Timestamp: {{ order.created_at }}
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:16px 26px;background:#f7f7f7;color:#777;font-size:12px;">
+              © {{ now|date:"Y" }} A&amp;M Signature — Wear Your Story
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
