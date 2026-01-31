@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import RegisterForm
-
+import os
+from django.http import HttpResponse
+from django.contrib.auth.models import User
 
 def register(request):
     """
@@ -53,3 +55,22 @@ def user_logout(request):
 
     logout(request)
     return redirect("login")
+
+def create_superuser_once(request):
+    """
+    Creates a superuser ONE TIME using env variables.
+    Disable/remove after it works.
+    """
+    token = request.GET.get("token")
+    if token != os.environ.get("ADMIN_CREATE_TOKEN"):
+        return HttpResponse("Forbidden", status=403)
+
+    username = os.environ.get("DJANGO_SUPERUSER_USERNAME", "admin")
+    email = os.environ.get("DJANGO_SUPERUSER_EMAIL", "admin@example.com")
+    password = os.environ.get("DJANGO_SUPERUSER_PASSWORD", "Admin@12345")
+
+    if User.objects.filter(username=username).exists():
+        return HttpResponse("Superuser already exists ✅")
+
+    User.objects.create_superuser(username=username, email=email, password=password)
+    return HttpResponse("Superuser created ✅ You can now login to /admin")
