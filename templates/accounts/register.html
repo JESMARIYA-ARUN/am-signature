@@ -16,7 +16,7 @@
         {% for field in form %}
           <div class="mb-3">
 
-            {# ✅ For floating labels: input must be inside .form-floating and label comes AFTER input #}
+            
             <div class="form-floating">
               {{ field|add_class:"form-control auth-input" }}
 
@@ -25,7 +25,7 @@
               </label>
             </div>
 
-            {# ✅ Password strength meter (keep it OUTSIDE .form-floating) #}
+            
             {% if field.name == "password1" %}
               <div class="strength-meter mt-2">
                 <div class="strength-track">

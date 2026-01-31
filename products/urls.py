@@ -9,10 +9,4 @@ urlpatterns = [
     path('wishlist/remove/<int:item_id>/', views.remove_from_wishlist, name='remove_from_wishlist'),
     path('wishlist/move-to-cart/<int:item_id>/', views.move_to_cart, name='move_to_cart'),
 
-    # am_signature/urls.py
-
-    #path('cart/', views.cart_detail, name='cart')
-
-
-
 ]

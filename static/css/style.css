@@ -20,10 +20,10 @@ body {
 }
 .main-content {
   flex: 1;
-  padding-bottom: 90px; /* space for mobile nav */
+  padding-bottom: 90px; 
 }
 .top-nav {
-    display: none; /* Hide top nav for now (mobile-first) */
+    display: none; 
 }
 .site-header {
   position: sticky;
@@ -70,7 +70,7 @@ body {
     bottom: -4px;
     width: 100%;
     height: 2px;
-    background-color: currentColor; /* SAME color */
+    background-color: currentColor; 
 }
 .top-nav a.active {
     background-color: rgba(255, 255, 255, 0.12);
@@ -83,7 +83,6 @@ body {
   color: #666;
 }
 
-/* DESKTOP VIEW */
 @media (min-width: 992px) {
     .site-header {
         justify-content: space-between;
@@ -91,7 +90,7 @@ body {
     }
 
     .site-logo {
-        height: 110px;   /* 👈 DESKTOP SIZE */
+        height: 110px;   
     }
 
     .top-nav {
@@ -106,7 +105,7 @@ body {
     }
 }
 
-/* MOBILE OPTIMIZATION */
+
 @media (max-width: 768px) {
     .site-logo {
         height: 48px;
@@ -118,15 +117,15 @@ body {
     }
 }
 
-/* 📱 Mobile only */
+
 @media (max-width: 768px) {
 
-  /* hide top nav completely */
+  
   .top-nav {
     display: none;
   }
 
-  /* center logo */
+
   .header-inner {
     justify-content: center;
   }
@@ -139,7 +138,7 @@ body {
 
 
 .main-content {
-    padding-bottom: 70px; /* space for mobile nav */
+    padding-bottom: 70px; 
 }
 
 
@@ -158,7 +157,7 @@ body {
 }
 
 .mobile-nav a {
-    color: #d4af37; /* gold */
+    color: #d4af37; 
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -171,7 +170,7 @@ body {
     stroke-width: 1.8;
 }
 
-/* Hide mobile nav on desktop */
+
 @media (min-width: 768px) {
     .mobile-nav {
         display: none;
@@ -192,12 +191,11 @@ body {
 }
 
 
-/* Hover (optional) */
+
 .mobile-nav a:hover {
     background-color: rgba(255, 255, 255, 0.08);
 }
 
-/* ACTIVE STATE */
 .mobile-nav a.active {
     background-color: rgba(255, 255, 255, 0.15);
 }
@@ -277,27 +275,23 @@ body {
     }
 }
 
-/* LOGIN PAGE STYLES */
 
-/* Card */
 .login-card {
     background: rgba(0, 0, 0, 0.9);
     border: 1px solid #C9A24D;
     border-radius: 18px;
 }
 
-/* Logo */
 .login-logo {
     width: 140px;
 }
 
-/* Gold text */
+
 .gold-text {
     color: #C9A24D;
     font-weight: 600;
 }
 
-/* Inputs */
 .dark-input {
     background-color: transparent;
     color: #fff;
@@ -311,12 +305,11 @@ body {
     box-shadow: 0 0 0 1rem rgba(201, 162, 77, 0.25);
 }
 
-/* Floating labels */
 .form-floating label {
     color: #aaa;
 }
 
-/* Gold button */
+
 .btn-gold {
     background: linear-gradient(135deg, #C9A24D, #E6C46A);
     color: #000;
@@ -330,7 +323,7 @@ body {
     box-shadow: 0 6px 20px rgba(201, 162, 77, 0.5);
 }
 
-/* Links */
+
 .gold-link {
     color: #C9A24D;
     text-decoration: none;
@@ -340,7 +333,7 @@ body {
     text-decoration: underline;
 }
 
-/* AUTH PAGES (LOGIN & REGISTER) */
+
 .auth-logo {
     width: 90px;
 }
@@ -390,7 +383,7 @@ body {
 .gold-link:hover {
     text-decoration: underline;
 }
-/* INPUT FOCUS ANIMATION */
+
 .form-control {
     transition: all 0.3s ease;
 }
@@ -448,8 +441,8 @@ body {
     transform: translateY(-2px);
 }
 .product-detail-img {
-    max-width: 380px;   /* controls width */
-    max-height: 520px;  /* controls height */
+    max-width: 380px;  
+    max-height: 520px;  
     object-fit: cover;
 }
 .product-detail-img{
@@ -468,8 +461,6 @@ body {
     }
 }
 
-
-/* your script adds these classes */
 .strength-bar.weak{ background:#dc3545; }
 .strength-bar.medium{ background:#ffc107; }
 .strength-bar.strong{ background:#198754; }

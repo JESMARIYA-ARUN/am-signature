@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
             alert.classList.add("fade");
 
             setTimeout(() => alert.remove(), 500);
-        }, 4000); // ⏱ 4 seconds
+        }, 4000); 
     });
 
     document.querySelectorAll(".qty-btn").forEach(button => {
@@ -81,9 +81,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     document.getElementById("cart-total").innerText = data.cart_total;
 
-                    // If cart becomes empty, reload once OR show empty text (optional)
                     if (document.querySelectorAll("[id^='cart-item-']").length === 0) {
-                        location.reload(); // easiest way to show "Your cart is empty."
+                        location.reload(); 
                     }
                     return;
                 }

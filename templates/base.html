@@ -40,13 +40,13 @@
         <main class="main-content">
         {% block content %}{% endblock %}
         </main>
-        <!-- 🔻 FOOTER -->
+        <!--  FOOTER -->
         <footer class="site-footer">
             <p>© 2025 A&M Signature — Wear Your Story</p>
         </footer>
 
 
-        <!-- 📱 MOBILE BOTTOM NAV (OPTIONAL, VERY GOOD UX) -->
+        <!--  MOBILE BOTTOM NAV -->
         <nav class="mobile-nav">
             <a href="{% url 'products:product_list' %}" class="{% if request.resolver_match.url_name == 'product_list' %}active{% endif %}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"

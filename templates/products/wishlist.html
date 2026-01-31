@@ -20,7 +20,7 @@
             <h6 class="mb-1">{{ item.product.name }}</h6>
             <p class="fw-bold mb-2">€{{ item.product.price }}</p>
 
-            <!-- ✅ Move to cart must be POST to send size -->
+            
             <form method="post" action="{% url 'products:move_to_cart' item.id %}" class="mt-2">
               {% csrf_token %}
 
