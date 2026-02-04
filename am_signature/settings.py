@@ -143,6 +143,8 @@ DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "A&M <no-reply@example
 
 ADMIN_NOTIFICATION_EMAILS = os.environ.get("ADMIN_NOTIFICATION_EMAILS", "")
 ADMIN_NOTIFICATION_EMAILS = [x.strip() for x in ADMIN_NOTIFICATION_EMAILS.split(",") if x.strip()]
+EMAIL_TIMEOUT = 10
+
 
 
 # =========================

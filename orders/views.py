@@ -164,14 +164,10 @@ def place_order(request):
 
         with transaction.atomic():
 
-            # 🔹 Stock validation before creating order
+            # Stock validation before creating order
             for item in cart.items.select_related("product"):
                 if item.product.has_sizes:
-                    ps = get_object_or_404(
-                        ProductSize,
-                        product=item.product,
-                        size=item.size
-                    )
+                    ps = get_object_or_404(ProductSize, product=item.product, size=item.size)
                     if ps.stock < item.quantity:
                         messages.error(
                             request,
@@ -179,7 +175,7 @@ def place_order(request):
                         )
                         return redirect("orders:cart")
 
-            # 🔹 Create order
+            # Create order
             order = Order.objects.create(
                 user=request.user,
                 full_name=full_name,
@@ -187,7 +183,7 @@ def place_order(request):
                 address=address,
             )
 
-            # 🔹 Create order items and reduce stock
+            # Create order items and reduce stock
             for item in cart.items.select_related("product"):
                 OrderItem.objects.create(
                     order=order,
@@ -204,17 +200,25 @@ def place_order(request):
                     ps.stock -= item.quantity
                     ps.save()
 
-            # 🔹 Clear cart after successful order
+            # Clear cart after successful order
             cart.items.all().delete()
 
-        # 🔹 Email notifications
-        send_admin_order_email(order)
-        send_customer_order_email(order)
+        # Email notifications
+        try:
+            send_admin_order_email(order)
+        except Exception as e:
+            print("Admin email failed:", e)
+
+        try:
+            send_customer_order_email(order)
+        except Exception as e:
+            print("Customer email failed:", e)
 
         messages.success(request, "Order placed successfully!")
         return redirect("orders:order_success")
 
     return render(request, "orders/place_order.html")
+
 
 
 # ==================================================
